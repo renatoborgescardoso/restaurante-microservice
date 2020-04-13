@@ -1,6 +1,6 @@
 spring:
   application:
-    name: 'restaurante'
+    name: 'tipocomida'
   profiles:
     active: default
   cloud:

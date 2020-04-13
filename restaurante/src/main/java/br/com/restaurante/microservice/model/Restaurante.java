@@ -9,11 +9,20 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
 @Entity
 @Table(name = "restaurante")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(Include.NON_NULL)
 public class Restaurante implements Serializable {
 
 	private static final long serialVersionUID = -1431844146229714979L;
+
+	public Restaurante() {
+	}
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

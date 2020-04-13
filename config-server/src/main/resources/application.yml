@@ -9,5 +9,5 @@ spring:
         encrypt:
             enabled: false
         git:
-          uri: https://github.com/renatoborgescardoso/microservice-repo-curso-alura
-          search-paths: restaurante
+          uri: https://github.com/renatoborgescardoso/microservice-repo-restaurante/
+          search-paths: restaurante, tipocomida

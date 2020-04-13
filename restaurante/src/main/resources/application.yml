@@ -2,8 +2,17 @@ server:
   port: 8080
 
 spring:  application:    name: 'restaurante'
-
-eureka:  client:    fetch-registry: true
+  datasource:
+    password: root
+    username: root
+    url: jdbc:mysql://localhost:3306/restaurante?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties.hibernate.dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+eureka:
+  client:
     register-with-eureka: true
-    service-url: 
-    	defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
