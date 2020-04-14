@@ -1,4 +1,4 @@
-package br.com.restaurante.microservice.controller;
+package br.com.restaurante.pagamento.controller;
 
 import java.util.List;
 
@@ -10,29 +10,29 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import br.com.restaurante.microservice.model.Pedido;
-import br.com.restaurante.microservice.service.PedidoService;
+import br.com.restaurante.pagamento.model.Pagamento;
+import br.com.restaurante.pagamento.service.PagamentoService;
 
 @RestController
 @RequestMapping(value = "/pedido")
-public class PedidoController {
+public class PagamentoController {
 	
 	@Autowired
-	private PedidoService pedidoService;
+	private PagamentoService pagamentoService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public void persitir(@RequestBody Pedido pedido) {
+	public void persitir(@RequestBody Pagamento pagamento) {
 		try {
-			pedidoService.persitir(pedido);
+			pagamentoService.persitir(pagamento);
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 	}
 
 	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
-	public List<Pedido> findAll() {
+	public List<Pagamento> findAll() {
 		try {
-			return pedidoService.findAll();
+			return pagamentoService.findAll();
 		} catch (Exception e) {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}

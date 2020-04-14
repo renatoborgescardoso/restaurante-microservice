@@ -3,6 +3,7 @@ package br.com.restaurante.microservice.model;
 import java.io.Serializable;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,8 +21,8 @@ public class PedidoItem implements Serializable {
 
 	private int quantidade;
 
-	@JoinColumn(name = "pedido", referencedColumnName = "codigo")
-	@ManyToOne(optional = false)
+	@JoinColumn(name = "pedido", referencedColumnName = "id")
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	private Pedido pedido;
 
 	private int idTipoComida;

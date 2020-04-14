@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.restaurante.microservice.model.Pedido;
+import br.com.restaurante.microservice.model.PedidoItem;
 import br.com.restaurante.microservice.model.SituacaoPedidoEnum;
 import br.com.restaurante.microservice.repository.PedidoRepository;
 
@@ -19,10 +20,17 @@ public class PedidoService {
 	@Autowired
 	private PedidoRepository pedidoRepository;
 	
+	@Autowired
+	private PedidoItemService pedidoItemService;
+	
 	public void persitir(Pedido pedido) throws Exception {
 		try {
 			pedido.setSituacao(SituacaoPedidoEnum.AGUARDANDO_APROVACAO);
 			pedidoRepository.save(pedido);
+			for (PedidoItem pedidoItem : pedido.getPedidoItens()) {
+				pedidoItem.setPedido(pedido);
+				pedidoItemService.persitir(pedidoItem);
+			}
 		} catch (Exception e) {
 			logger.error(e.getMessage());
 			throw new Exception("Houve um erro ao persitir o pedido.");
