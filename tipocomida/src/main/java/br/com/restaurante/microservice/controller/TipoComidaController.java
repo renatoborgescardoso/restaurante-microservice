@@ -29,7 +29,7 @@ public class TipoComidaController {
 		}
 	}
 
-	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<TipoComida> findAll() {
 		try {
 			return tipoComidaService.findAll();

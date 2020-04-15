@@ -29,7 +29,7 @@ public class RestauranteController {
 		}
 	}
 	
-	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Restaurante> findAll() {
 		try {
 			return restauranteService.findAll();
