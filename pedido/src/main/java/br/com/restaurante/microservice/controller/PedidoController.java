@@ -20,7 +20,7 @@ public class PedidoController {
 	@Autowired
 	private PedidoService pedidoService;
 	
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value = "persitir", method = RequestMethod.POST)
 	public void persitir(@RequestBody Pedido pedido) {
 		try {
 			pedidoService.persitir(pedido);
@@ -28,8 +28,17 @@ public class PedidoController {
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
 		}
 	}
+	
+	@RequestMapping(value = "/montagemPedido", method = RequestMethod.POST)
+	public void montagemPedido(@RequestBody Pedido pedido) {
+		try {
+			pedidoService.montagemPedido(pedido);
+		} catch (Exception e) {
+			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, e.getMessage());
+		}
+	}
 
-	@RequestMapping(value = "/findAll", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public List<Pedido> findAll() {
 		try {
 			return pedidoService.findAll();

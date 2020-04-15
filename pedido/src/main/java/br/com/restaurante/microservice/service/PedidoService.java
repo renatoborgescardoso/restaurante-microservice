@@ -1,5 +1,6 @@
 package br.com.restaurante.microservice.service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -26,6 +27,7 @@ public class PedidoService {
 	public void persitir(Pedido pedido) throws Exception {
 		try {
 			pedido.setSituacao(SituacaoPedidoEnum.AGUARDANDO_APROVACAO);
+			pedido.setDataPedido(LocalDate.now());
 			pedidoRepository.save(pedido);
 			for (PedidoItem pedidoItem : pedido.getPedidoItens()) {
 				pedidoItem.setPedido(pedido);
@@ -53,5 +55,21 @@ public class PedidoService {
 			logger.error(e.getMessage());
 			throw new Exception("Houve um erro ao consultar os pedidos.");
 		}
+	}
+
+	public void montagemPedido(Pedido pedido) throws Exception {
+		try {
+			pedido.setSituacao(SituacaoPedidoEnum.MONTANDO_PEDIDO);
+			pedido.setDataPedido(LocalDate.now());
+			pedidoRepository.save(pedido);
+			for (PedidoItem pedidoItem : pedido.getPedidoItens()) {
+				pedidoItem.setPedido(pedido);
+				pedidoItemService.persitir(pedidoItem);
+			}
+		} catch (Exception e) {
+			logger.error(e.getMessage());
+			throw new Exception("Houve um erro ao montar o pedido.");
+		}
+		
 	}
 }

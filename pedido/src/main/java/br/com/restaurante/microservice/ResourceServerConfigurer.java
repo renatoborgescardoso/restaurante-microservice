@@ -12,6 +12,6 @@ public class ResourceServerConfigurer extends ResourceServerConfigurerAdapter {
 	public void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable();
 		http.authorizeRequests()
-			.antMatchers(HttpMethod.POST, "/tipocomida").hasRole("CLIENTE");
+			.antMatchers(HttpMethod.POST, "/pedido/persitir").hasRole("ADMIN");
 	}
 }

@@ -33,7 +33,7 @@ public class WebSecutiryConfigurer extends WebSecurityConfigurerAdapter{
 			.passwordEncoder(passwordEncoder())
 			.withUser("joao")
 			.password(passwordEncoder().encode("joaopwd"))
-			.roles("USER")
+			.roles("CLIENTE")
 			.and()
 			.passwordEncoder(passwordEncoder())
 			.withUser("renato")
